@@ -59,7 +59,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="h-5 w-5 text-primary shrink-0" />
-                <span>9996715504</span>
+                <span>+919996715504</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Instagram className="h-5 w-5 text-primary shrink-0" />
