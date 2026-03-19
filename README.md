@@ -1,1 +1,1 @@
-www.mgstudio.in
+www.mgstudios.in
