@@ -51,7 +51,7 @@ export function BookingForm() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-card border border-primary/30 rounded-lg p-12 text-center max-w-xl mx-auto reveal-up transition-smooth">
+      <div className="bg-card border border-primary/30 rounded-lg p-6 sm:p-10 lg:p-12 text-center max-w-xl mx-auto reveal-up transition-smooth">
         <div className="flex justify-center mb-6">
           <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
             <CheckCircle className="h-10 w-10 text-primary" />
@@ -66,27 +66,29 @@ export function BookingForm() {
         <p className="text-muted-foreground text-sm mb-8">
           If Calendly did not open, click the button below.
         </p>
-        <Button
-          type="button"
-          onClick={() => window.open(CALENDLY_URL, "_blank", "noopener,noreferrer")}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 transition-smooth hover:-translate-y-0.5"
-        >
-          Open Calendly
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => setIsSubmitted(false)}
-          className="ml-3 border-border"
-        >
-          Edit Details
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button
+            type="button"
+            onClick={() => window.open(CALENDLY_URL, "_blank", "noopener,noreferrer")}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 transition-smooth hover:-translate-y-0.5 w-full sm:w-auto"
+          >
+            Open Calendly
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsSubmitted(false)}
+            className="border-border w-full sm:w-auto"
+          >
+            Edit Details
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-card border border-border rounded-lg p-8 max-w-2xl mx-auto reveal-up transition-smooth">
+    <form onSubmit={handleSubmit} className="bg-card border border-border rounded-lg p-5 sm:p-8 max-w-2xl mx-auto reveal-up transition-smooth">
       <div className="grid gap-6">
         {/* Name */}
         <div className="space-y-2">
@@ -150,7 +152,7 @@ export function BookingForm() {
         {/* Submit */}
         <Button
           type="submit"
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4 h-12 text-lg font-medium transition-smooth hover:-translate-y-0.5"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4 h-11 sm:h-12 text-base sm:text-lg font-medium transition-smooth hover:-translate-y-0.5"
         >
           <ExternalLink className="h-5 w-5 mr-2" />
           Continue To Calendly

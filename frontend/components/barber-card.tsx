@@ -44,7 +44,7 @@ export function BarberCard({
     return (
       <div className="bg-card border border-primary/30 rounded-lg overflow-hidden reveal-up transition-smooth hover-lift">
         <div className="grid md:grid-cols-2 gap-0 items-stretch">
-          <div className="relative h-full min-h-[400px] md:min-h-[500px]">
+          <div className="relative h-full min-h-[300px] sm:min-h-[360px] md:min-h-[500px]">
             <Image
               src={image}
               alt={name}
@@ -54,13 +54,13 @@ export function BarberCard({
             />
           </div>
 
-          <div className="p-8 flex flex-col justify-center">
+          <div className="p-5 sm:p-8 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 text-primary text-sm uppercase tracking-widest mb-2">
               <Scissors className="h-4 w-4" />
               <span>{title}</span>
             </div>
 
-            <h2 className="text-3xl font-serif font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-foreground mb-4">
               {name}
             </h2>
 
@@ -108,7 +108,7 @@ export function BarberCard({
       )}
     >
       {isRishab && (
-        <span className="absolute top-3 left-3 z-30 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-md">
+        <span className="absolute top-3 left-3 z-30 bg-primary text-primary-foreground text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-md">
           Featured Senior
         </span>
       )}
@@ -128,8 +128,8 @@ export function BarberCard({
         />
       </div>
 
-      <div className={cn("p-6 flex flex-col flex-grow", shouldHighlight && "p-7")}>
-        <h3 className={cn("text-xl font-serif font-bold text-foreground mb-1", shouldHighlight && "text-2xl")}>
+      <div className={cn("p-5 sm:p-6 flex flex-col flex-grow", shouldHighlight && "sm:p-7")}>
+        <h3 className={cn("text-lg sm:text-xl font-serif font-bold text-foreground mb-1", shouldHighlight && "text-xl sm:text-2xl")}>
           {name}
         </h3>
 

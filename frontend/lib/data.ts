@@ -189,6 +189,29 @@ export const ladiesSalonServices = [
   },
 ];
 
+export const academyTuitionClasses = [
+  {
+    id: 201,
+    name: "Beginner Barbering Basics",
+    description: "Foundational training on tools, hygiene, sectioning, and classic cuts.",
+  },
+  {
+    id: 202,
+    name: "Fade & Blending Masterclass",
+    description: "Hands-on fade techniques, clipper control, and smooth blending practice.",
+  },
+  {
+    id: 203,
+    name: "Beard Styling & Grooming",
+    description: "Line-up precision, beard shaping, and finishing for premium client results.",
+  },
+  {
+    id: 204,
+    name: "Unisex Hair Styling Program",
+    description: "Core women and unisex styling, basic coloring concepts, and salon workflow.",
+  },
+];
+
 export const appointmentServices = [
   ...haircutStyles.map((style) => ({
     id: style.id,
@@ -199,6 +222,11 @@ export const appointmentServices = [
     id: service.id,
     name: service.name,
     category: "Unisex Salon (Ladies)",
+  })),
+  ...academyTuitionClasses.map((course) => ({
+    id: course.id,
+    name: course.name,
+    category: "Academy / Tuition Classes",
   })),
 ];
 

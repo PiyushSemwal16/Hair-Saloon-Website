@@ -16,7 +16,7 @@ export default function PortfolioPage() {
 
   if (!barber) {
     return (
-      <main className="min-h-screen">
+      <main className="w-full min-h-screen overflow-x-hidden">
         <Navbar />
         <div className="pt-32 pb-16 text-center">
           <h1 className="text-4xl font-serif font-bold text-foreground mb-4">
@@ -35,7 +35,7 @@ export default function PortfolioPage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="w-full min-h-screen overflow-x-hidden">
       <Navbar />
 
       {/* Header */}
