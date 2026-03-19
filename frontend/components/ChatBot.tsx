@@ -21,7 +21,7 @@ const FAQS: FAQItem[] = [
   {
     question: "What are your opening hours?",
     answer:
-      "We're open every day from 10:00 AM to 9:00 PM. If you want a preferred slot, I can help you book one.",
+      "We're open every day from 9:00 AM to 10:00 PM. If you want a preferred slot, I can help you book one.",
   },
   {
     question: "Do I need an appointment?",
@@ -47,6 +47,7 @@ const FAQS: FAQItem[] = [
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [detectedFaceShape, setDetectedFaceShape] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -64,7 +65,27 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = async (messageText?: string) => {
+  useEffect(() => {
+    const syncFaceShape = () => {
+      if (typeof window === "undefined") return;
+      const storedShape = window.localStorage.getItem("detectedFaceShape") || "";
+      setDetectedFaceShape(storedShape);
+    };
+
+    syncFaceShape();
+    window.addEventListener("face-shape-updated", syncFaceShape);
+    window.addEventListener("storage", syncFaceShape);
+
+    return () => {
+      window.removeEventListener("face-shape-updated", syncFaceShape);
+      window.removeEventListener("storage", syncFaceShape);
+    };
+  }, []);
+
+  const handleSendMessage = async (
+    messageText?: string,
+    faceShapeForRequest?: string
+  ) => {
     const textToSend = (messageText ?? input).trim();
     if (!textToSend) return;
 
@@ -111,6 +132,7 @@ export default function ChatBot() {
         body: JSON.stringify({
           message: textToSend,
           conversationHistory: updatedHistory,
+          faceShape: faceShapeForRequest || detectedFaceShape || undefined,
         }),
       });
 
@@ -121,9 +143,14 @@ export default function ChatBot() {
       }
 
       // Add bot response
+      const cleanedReply = data.reply
+        .replace(/Tap\s+"?Book this style"?[^.]*\.?/gi, "")
+        .replace(/Suggested style:\s*[^\n]+/gi, "")
+        .trim();
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.reply,
+        text: cleanedReply || data.reply,
         sender: "bot",
         timestamp: new Date(),
       };
@@ -145,6 +172,35 @@ export default function ChatBot() {
     }
   };
 
+  useEffect(() => {
+    const handleDetectedShape = (event: Event) => {
+      const customEvent = event as CustomEvent<{ faceShape?: string }>;
+      const shape = customEvent.detail?.faceShape || "";
+
+      if (!shape || isLoading) return;
+
+      setDetectedFaceShape(shape);
+      setIsOpen(true);
+      void handleSendMessage("Suggest a hairstyle for me.", shape);
+    };
+
+    window.addEventListener(
+      "face-shape-detected",
+      handleDetectedShape as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "face-shape-detected",
+        handleDetectedShape as EventListener
+      );
+    };
+  }, [isLoading, messages, input, detectedFaceShape]);
+
+  const visibleMessages = messages.filter(
+    (message) => !/^Suggested style:\s*/i.test(message.text.trim())
+  );
+
   return (
     <>
       {/* Floating Button */}
@@ -164,10 +220,17 @@ export default function ChatBot() {
         <div className="fixed bottom-6 right-6 w-[calc(100vw-2rem)] max-w-sm h-[520px] bg-background border border-border rounded-lg shadow-2xl flex flex-col z-50 animate-in fade-in slide-in-from-bottom-2">
           {/* Header */}
           <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex items-center justify-between">
-            <h3 className="font-semibold flex items-center gap-2">
-              <MessageCircle className="w-5 h-5" />
-              Hair Style Assistant
-            </h3>
+            <div>
+              <h3 className="font-semibold flex items-center gap-2">
+                <MessageCircle className="w-5 h-5" />
+                Hair Style Assistant
+              </h3>
+              {detectedFaceShape && (
+                <p className="text-[11px] mt-1 text-primary-foreground/90">
+                  Detected face shape: {detectedFaceShape}
+                </p>
+              )}
+            </div>
             <Button
               variant="ghost"
               size="icon"
@@ -202,7 +265,7 @@ export default function ChatBot() {
               </div>
             )}
 
-            {messages.map((message) => (
+            {visibleMessages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${

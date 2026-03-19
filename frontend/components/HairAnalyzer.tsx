@@ -21,6 +21,10 @@ export default function HairAnalyzer() {
   const handleUpload = async (file: File | null) => {
     if (!file) {
       setSuggestions([]);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem("detectedFaceShape");
+        window.dispatchEvent(new Event("face-shape-updated"));
+      }
       return;
     }
 
@@ -36,6 +40,15 @@ export default function HairAnalyzer() {
         img.onload = async () => {
           const result = await detectFaceShape(img);
           detectedShape = result.shape;
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("detectedFaceShape", detectedShape);
+            window.dispatchEvent(new Event("face-shape-updated"));
+            window.dispatchEvent(
+              new CustomEvent("face-shape-detected", {
+                detail: { faceShape: detectedShape },
+              })
+            );
+          }
           resolve();
         };
       });

@@ -12,6 +12,7 @@ interface Message {
 interface ChatRequest {
   message: string;
   conversationHistory: Message[];
+  faceShape?: string;
 }
 
 const SYSTEM_PROMPT = `You are a professional hair style and hair care assistant for a premium barber shop called "MG STUDIO". Your expertise includes:
@@ -30,9 +31,10 @@ Guidelines:
 5. Ask clarifying questions if needed (face shape, hair type, hair length, lifestyle)
 6. Never provide medical advice - for hair loss or scalp issues, recommend consulting a dermatologist
 7. Be enthusiastic about helping customers find their perfect style
+8. If the user shows booking intent, include a short booking suggestion and confirm the recommended service name
 
 FAQ context to keep answers consistent:
-- Opening hours: 10:00 AM to 9:00 PM, every day.
+- Opening hours: 9:00 AM to 1:00 PM, every day.
 - Appointments: Walk-ins are welcome, but appointments are recommended.
 - Beard grooming pricing: Varies by service type; exact price should be confirmed during booking.
 - Hair spa and treatments: Available for dryness, frizz, and damage recovery.
@@ -42,7 +44,7 @@ Current context: You're helping customers of MG STUDIO find the best hairstyles 
 export async function POST(req: NextRequest) {
   try {
     const body: ChatRequest = await req.json();
-    const { message, conversationHistory } = body;
+    const { message, conversationHistory, faceShape } = body;
 
     if (!message || !message.trim()) {
       return NextResponse.json(
@@ -67,7 +69,11 @@ export async function POST(req: NextRequest) {
       )
       .join("\n");
 
-    const fullPrompt = `${SYSTEM_PROMPT}\n\nConversation History:\n${formattedHistory}\n\nUser: ${message}\n\nAssistant:`;
+    const faceShapeContext = faceShape
+      ? `Detected user face shape: ${faceShape}. If the user asks hairstyle advice, start your answer with: "You have a ${faceShape.toLowerCase()} face shape." and then suggest 3 suitable styles with short reasons.`
+      : "No detected face shape yet. Ask for face shape details when needed.";
+
+    const fullPrompt = `${SYSTEM_PROMPT}\n\n${faceShapeContext}\n\nConversation History:\n${formattedHistory}\n\nUser: ${message}\n\nAssistant:`;
 
     console.log("Sending request to Gemini API...");
 
