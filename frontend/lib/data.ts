@@ -1,5 +1,5 @@
 import myImage from "../public/1773835017380 copy.png"
-import Gourav from "../public/image.png"
+import Gourav from "../public/image copy 5.png"
 import Anuj from "../public/image copy.png"
 import Rohit from "../public/image copy 2.png"
 import Tony from "../public/image copy 3.png"
