@@ -10,6 +10,7 @@ export const barbers = [
     name: "Mohit gaiswal",
     title: "Owner / Master Barber",
     specialty: "Classic & Modern Cuts",
+    instagram: "https://www.instagram.com/mohitgaiswal?igsh=MTd3ZXI1ZnR1NmpnZw==",
     bio: "With over 10 years of experience, Mohit founded MG STUDIO to bring premium grooming services to the community. His expertise spans classic barbering techniques and contemporary styles.",
     image: myImage,
     isOwner: true,
@@ -28,6 +29,7 @@ export const barbers = [
     name: "Rishab",
     title: "Unisex Hairdresser ",
     specialty: "Women’s haircuts, hair coloring, and styling",
+    instagram: "https://www.instagram.com/hair_artist_rishabh?igsh=bHpsN2M5Z3k1YWxh",
     bio: "",
     image: Gourav,
     isOwner: false,    portfolio: [
@@ -36,21 +38,7 @@ export const barbers = [
       { type: "video", src: "/videos/Rishab/Rishab-3.mp4", title: "Fade Cutting" },
       // { type: "image", src: "https://images.unsplash.com/photo-1595348440529-ceb849e26b6f?w=600&h=600&fit=crop", title: "Hair Styling" },
     ],  },
-  {
-    id: 3,
-    name: "Tony",
-    title: "Senior Barber",
-    specialty: "Hair Styling & Grooming",
-    bio: "",
-    image: Tony,
-    isOwner: false,
-    portfolio: [
-      { type: "image", src: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=600&h=600&fit=crop", title: "Pompadour" },
-      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/forrest_gump.mp4", title: "Beard Styling Tutorial" },
-      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Beard Styling" },
-      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Design Fade" },
-    ],
-  },
+ 
   {
     id: 4,
     name: "Anuj",
@@ -96,7 +84,21 @@ export const barbers = [
       { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Precision Cut" },
     ],
   },
- 
+  {
+    id: 3,
+    name: "Tony",
+    title: "Senior Barber",
+    specialty: "Hair Styling & Grooming",
+    bio: "",
+    image: Tony,
+    isOwner: false,
+    portfolio: [
+      { type: "image", src: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=600&h=600&fit=crop", title: "Pompadour" },
+      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/forrest_gump.mp4", title: "Beard Styling Tutorial" },
+      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Beard Styling" },
+      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Design Fade" },
+    ],
+  },
  
 ];
 

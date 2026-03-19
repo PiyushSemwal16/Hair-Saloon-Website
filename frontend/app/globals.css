@@ -143,6 +143,19 @@
   .reveal-delay-6 {
     animation-delay: 480ms;
   }
+
+  .lead-highlight {
+    padding: 0.35rem;
+    border-radius: 0.85rem;
+    background: linear-gradient(155deg, color-mix(in oklch, var(--primary) 55%, transparent), transparent 38%);
+    box-shadow: 0 18px 34px color-mix(in oklch, var(--primary) 22%, transparent);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .lead-highlight:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 42px color-mix(in oklch, var(--primary) 28%, transparent);
+  }
 }
 
 @keyframes reveal-up {
