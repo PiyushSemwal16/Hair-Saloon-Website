@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { barbers } from "@/lib/data";
@@ -8,11 +9,49 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { PortfolioMedia } from "@/components/portfolio-media";
+import { Skeleton } from "@/components/ui/skeleton";
+
+interface Post {
+  _id: string;
+  barberId: number;
+  barberName: string;
+  type: 'image' | 'video';
+  url: string;
+  title: string;
+  caption: string;
+  createdAt: string;
+}
 
 export default function PortfolioPage() {
   const params = useParams();
   const barberId = Number(params.id);
   const barber = barbers.find((b) => b.id === barberId);
+  const [dbPosts, setDbPosts] = useState<Post[]>([]);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`/api/admin/posts?barberId=${barberId}`, {
+          cache: 'no-store',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const orderedPosts = (data.posts || []).sort(
+            (a: Post, b: Post) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+          setDbPosts(orderedPosts);
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setIsLoadingPosts(false);
+      }
+    };
+
+    fetchPosts();
+  }, [barberId]);
 
   if (!barber) {
     return (
@@ -76,7 +115,55 @@ export default function PortfolioPage() {
             </p>
           </div>
 
-          {barber.portfolio && barber.portfolio.length > 0 ? (
+          {isLoadingPosts ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+              {[1, 2, 3].map((i) => (
+                <Skeleton key={i} className="w-full h-48 rounded-lg" />
+              ))}
+            </div>
+          ) : dbPosts.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+              {dbPosts.map((post) => (
+                <div
+                  key={post._id}
+                  className="group rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-smooth hover-lift bg-card"
+                >
+                  {/* Media */}
+                  <div className="relative aspect-square bg-muted overflow-hidden">
+                    {post.type === 'video' ? (
+                      <video
+                        src={post.url}
+                        className="w-full h-full object-cover"
+                        controls
+                        playsInline
+                      />
+                    ) : (
+                      <img
+                        src={post.url}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {post.title}
+                    </h3>
+                    {post.caption && (
+                      <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
+                        {post.caption}
+                      </p>
+                    )}
+                    <p className="text-primary text-sm mt-2">
+                      {post.type === 'video' ? '🎥 Video' : '📸 Photo'}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : barber.portfolio && barber.portfolio.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
               {barber.portfolio.map((work, index) => (
                 <div

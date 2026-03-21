@@ -42,6 +42,7 @@ export function PortfolioMedia({ type, src, title }: PortfolioMediaProps) {
         <video
           src={src}
           controls
+          playsInline
           controlsList="nodownload"
           onLoadStart={() => setIsLoading(false)}
           onError={() => setHasError(true)}

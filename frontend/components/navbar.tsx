@@ -13,6 +13,7 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/team", label: "Team" },
     { href: "/book", label: "Book Appointment" },
+    { href: "/admin", label: "Admin" },
   ];
 
   return (

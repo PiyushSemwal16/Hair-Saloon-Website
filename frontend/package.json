@@ -12,6 +12,8 @@
     "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^3.9.1",
     "@mediapipe/face_mesh": "^0.4.1633559619",
+    "cloudinary": "^1.41.0",
+    "mongoose": "^8.0.3",
     "@radix-ui/react-accordion": "1.2.12",
     "@radix-ui/react-alert-dialog": "1.1.15",
     "@radix-ui/react-aspect-ratio": "1.1.8",
