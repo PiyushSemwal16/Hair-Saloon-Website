@@ -47,12 +47,7 @@ export const barbers = [
     bio: "",
     image: Anuj,
     isOwner: false,
-    portfolio: [
-      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Clean Cut" },
-      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/sintel.mp4", title: "Textured Cut Demo" },
-      { type: "image", src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=600&fit=crop", title: "Textured" },
-      { type: "image", src: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&h=600&fit=crop", title: "Design Line" },
-    ],
+    portfolio: [],
   },
   {
     id: 5,
@@ -62,12 +57,7 @@ export const barbers = [
     bio: "",
     image: Rohit,
     isOwner: false,
-    portfolio: [
-      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Modern Fade" },
-      { type: "image", src: "https://images.unsplash.com/photo-1522337660859-02fbefca6088?w=600&h=600&fit=crop", title: "Styled Look" },
-      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/testvideo.mp4", title: "Fade Technique" },
-      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Sharp Design" },
-    ],
+    portfolio: [],
   },
    {
     id: 6,
@@ -77,12 +67,7 @@ export const barbers = [
     bio: "",
     image: Akshay,
     isOwner: false,
-    portfolio: [
-      { type: "image", src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=600&fit=crop", title: "Textured Crop" },
-      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Grooming" },
-      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/vids_google_main.mp4", title: "Precision Cutting" },
-      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Precision Cut" },
-    ],
+    portfolio: [],
   },
   {
     id: 3,
@@ -92,12 +77,7 @@ export const barbers = [
     bio: "",
     image: Tony,
     isOwner: false,
-    portfolio: [
-      { type: "image", src: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=600&h=600&fit=crop", title: "Pompadour" },
-      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/forrest_gump.mp4", title: "Beard Styling Tutorial" },
-      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Beard Styling" },
-      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Design Fade" },
-    ],
+    portfolio: [],
   },
  
 ];
